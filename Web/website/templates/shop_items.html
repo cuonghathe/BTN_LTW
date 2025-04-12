@@ -30,7 +30,7 @@
 
         <tr>
             <th scope="row">{{ item.id }}</th>
-            <td>{{ item.date_added }}</td>
+            <td>{{ item.date_added.strftime('%d/%m/%Y %H:%M') }}</td>
             <td>{{ item.product_name }}</td>
             <td>{{ item.previous_price }}</td>
             <td>{{ item.current_price }}</td>

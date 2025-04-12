@@ -1,15 +1,14 @@
-<!-- filepath: /d:/webNguyenlieu/Flask-Ecommerce/website/templates/add_ingredient.html -->
 {% extends 'base.html' %}
 
-{% block title %} Add Ingredients {% endblock %}
+{% block title %} Cập Nhật Nguyên Liệu {% endblock %}
 
 {% block body %}
-<div class="create_recipe_body" >
+<div class="create_recipe_body">
     <section>
         <div class="container form_container bg-white p-4 rounded shadow" style="max-width: 1000px; margin-top: 20px;">
             <div class="form_data">
                 <div class="form_heading">
-                    <h1>Thêm Nguyên Liệu</h1>
+                    <h1>Cập Nhật Nguyên Liệu</h1>
                 </div>
 
                 <form action="" method="POST" enctype="multipart/form-data" class="summit_form">
@@ -36,7 +35,7 @@
                     </div>
 
                     <div class="form_input">
-                        <label for="in_stock">Số Lượng Trong Kho</label>
+                        <label for="in_stock">Số Lượng Tồn Kho</label>
                         {{ form.in_stock(class="form-control") }}
                     </div>
 
@@ -55,8 +54,7 @@
                                 <option value="củ" {% if form.unit.data == "củ" %}selected{% endif %}>củ</option>
                                 <option value="quả" {% if form.unit.data == "quả" %}selected{% endif %}>quả</option>
                                 <option value="gói" {% if form.unit.data == "gói" %}selected{% endif %}>gói</option>
-
-                            </select>
+                              </select>
                         </div>
                     </div>
 
@@ -70,7 +68,7 @@
                         {{ form.ingredient_picture(class="form-control-file") }}
                     </div>
 
-                    <button type="submit" class="btn btn-primary mt-3">{{ form.add_ingredient.label.text }}</button>
+                    <button type="submit" class="btn btn-primary mt-3">{{ form.update_ingredient.label.text }}</button>
                 </form>
             </div>
         </div>

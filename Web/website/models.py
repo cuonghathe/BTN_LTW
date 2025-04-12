@@ -55,7 +55,10 @@ class Ingredient(db.Model):
     in_stock = db.Column(db.Integer, nullable=False)
     quantity = db.Column(db.Float, nullable=False, default=1.0)
     unit = db.Column(db.String(50), nullable=False)
+    date_added = db.Column(db.DateTime, default=datetime.utcnow)
     ingredient_picture = db.Column(db.String(1000), nullable=True)
+    flash_sale = db.Column(db.Boolean, default=False)
+
 
     carts = db.relationship('Cart', backref=db.backref('ingredient', lazy=True))
     orders = db.relationship('Order', backref=db.backref('ingredient', lazy=True))

@@ -21,7 +21,7 @@
         <td>{{ customer.id }}</td>
         <td>{{ customer.username }}</td>
         <td>{{ customer.email }}</td>
-        <td>{{ customer.date_joined }}</td>
+        <td>{{ customer.date_joined.strftime('%d/%m/%Y %H:%M') }}</td>
         </tr>
         {% endfor %}
     </tbody>
