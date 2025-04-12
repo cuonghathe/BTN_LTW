@@ -55,6 +55,7 @@ class IngredientForm(FlaskForm):
     in_stock = IntegerField('In Stock', validators=[DataRequired(), NumberRange(min=0)])
     quantity = FloatField('Quantity', validators=[DataRequired()])
     unit = StringField('Unit of Measurement', validators=[DataRequired()])
+    flash_sale = BooleanField('Flash Sale')
     ingredient_picture = FileField('Ingredient Picture')
 
     add_ingredient = SubmitField('Add Ingredient')
@@ -82,5 +83,8 @@ class RecipeForm(FlaskForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.ingredients.entries[0].form.ingredient.choices = [(str(ingredient.id), ingredient.name) for ingredient in
-                                                                Ingredient.query.all()]
+        # Populate ingredient choices dynamically for all entries
+        for ingredient_form in self.ingredients.entries:
+            ingredient_form.form.ingredient.choices = [
+                (str(ingredient.id), ingredient.name) for ingredient in Ingredient.query.all()
+            ]

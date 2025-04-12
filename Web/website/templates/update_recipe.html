@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %} Add Recipe {% endblock %}
+{% block title %} Cập Nhật Công Thức {% endblock %}
 
 {% block body %}
 
@@ -8,13 +8,13 @@
     document.addEventListener('DOMContentLoaded', function () {
         const ingredientsContainer = document.getElementById('ingredients-container');
         const addIngredientButton = document.getElementById('add-ingredient');
-    
+
         // Initial count of ingredients
         let ingredientIndex = document.querySelectorAll('.ingredient-row').length;
-    
+
         // Get the ingredient options from the first select field
         const ingredientOptions = document.querySelector('select[name^="ingredients-0-ingredient"]').innerHTML;
-    
+
         addIngredientButton.addEventListener('click', function () {
             const newRow = document.createElement('div');
             newRow.classList.add('ingredient-row', 'd-flex', 'align-items-center', 'mb-2');
@@ -29,7 +29,7 @@
             ingredientsContainer.appendChild(newRow);
             ingredientIndex++;
         });
-    
+
         ingredientsContainer.addEventListener('click', function (e) {
             if (e.target.classList.contains('remove-ingredient')) {
                 e.target.parentElement.remove();
@@ -43,33 +43,38 @@
         <div class="container form_container bg-white p-4 rounded shadow" style="max-width: 1000px; margin-top: 20px;">
             <div class="form_data">
                 <div class="form_heading">
-                    <h1>Thêm Công Thức</h1>
+                    <h1>Cập Nhật Công Thức</h1>
                 </div>
 
-                <form action="" method="POST" enctype="multipart/form-data" class="summit_form">
+                <form action="{{ url_for('admin.update_recipe', recipe_id=recipe.id) }}" method="POST" enctype="multipart/form-data" class="summit_form">
                     {{ form.hidden_tag() }}
 
                     <div class="form_input">
                         <label for="name">Tên Công Thức</label>
-                        {{ form.name(class="form-control") }}
+                        {{ form.name(class="form-control", value=recipe.name) }}
                     </div>
 
                     <div class="form_input">
                         <label for="description">Mô Tả</label>
-                        {{ form.description(class="form-control") }}
+                        {{ form.description(class="form-control", value=recipe.description) }}
                     </div>
 
                     <div class="form_input">
                         <label for="ingredients">Nguyên Liệu</label>
                         <div id="ingredients-container">
-                            {% for ingredient in form.ingredients %}
-                            <div class="ingredient-row d-flex align-items-center mb-2">
-                                {{ ingredient.csrf_token }}
-                                {{ ingredient.ingredient(class="form-control mr-2", placeholder="Nguyên Liệu") }}
-                                {{ ingredient.quantity(class="form-control mr-2", placeholder="Số Lượng") }}
-                                {{ ingredient.unit(class="form-control mr-2", placeholder="Đơn Vị") }}
-                                <button type="button" class="btn btn-danger remove-ingredient">X</button>
-                            </div>
+                            {% for ingredient_form in form.ingredients %}
+                                <div class="ingredient-row d-flex align-items-center mb-2">
+                                    {{ ingredient_form.csrf_token }}
+                                    <!-- Render only the ingredient name in the dropdown -->
+                                    <select name="ingredients-{{ loop.index0 }}-ingredient" class="form-control mr-2">
+                                        {% for ingredient in ingredient_form.ingredient.choices %}
+                                            <option value="{{ ingredient[0] }}" {% if ingredient[0] == ingredient_form.ingredient.data %} selected {% endif %}>
+                                                {{ ingredient[1] }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                    <button type="button" class="btn btn-danger remove-ingredient">X</button>
+                                </div>
                             {% endfor %}
                         </div>
                         <button type="button" id="add-ingredient" class="btn btn-secondary mt-2">Thêm Nguyên Liệu</button>
@@ -77,17 +82,17 @@
 
                     <div class="form_input">
                         <label for="instructions">Hướng Dẫn</label>
-                        {{ form.instructions(class="form-control") }}
+                        {{ form.instructions(class="form-control", value=recipe.instructions) }}
                     </div>
 
                     <div class="form_input">
                         <label for="cooking_time">Thời Gian Nấu</label>
-                        {{ form.cooking_time(class="form-control") }}
+                        {{ form.cooking_time(class="form-control", value=recipe.cooking_time) }}
                     </div>
 
                     <div class="form_input">
                         <label for="serving_size">Số Lượng Suất Ăn</label>
-                        {{ form.serving_size(class="form-control") }}
+                        {{ form.serving_size(class="form-control", value=recipe.serving_size) }}
                     </div>
 
                     <div class="form_input">
@@ -95,9 +100,7 @@
                         {{ form.recipe_picture(class="form-control-file") }}
                     </div>
 
-                    
-
-                    <button type="submit" class="btn btn-primary mt-3">{{ form.add_recipe.label.text }}</button>
+                    <button type="submit" class="btn btn-primary mt-3">{{ form.update_recipe.label.text }}</button>
                 </form>
             </div>
         </div>
