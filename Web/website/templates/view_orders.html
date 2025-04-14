@@ -9,19 +9,19 @@
     <thead>
         <tr>
 
-            <th scope="col">Order ID</th>
-            <th scope="col">Payment ID</th>
+            <th scope="col">ID Đơn Hàng</th>
+            <th scope="col">ID Giao Dịch</th>
 
-            <th scope="col">UserName</th>
-            <th scope="col">Customer Email</th>
+            <th scope="col">Tên Người DÙng</th>
+            <th scope="col">Email Khách Hàng</th>
 
-            <th scope="col">Product Name</th>
-            <th scope="col">Price</th>
-            <th scope="col">Quantity</th>
+            <th scope="col">Tên Sản Phẩm</th>
+            <th scope="col">Giá</th>
+            <th scope="col">Số Lượng</th>
 
-            <th scope="col">Picture</th>
-            <th scope="col">Status</th>
-            <th scope="col">Action</th>
+            <th scope="col">Ảnh</th>
+            <th scope="col">Trạng Thái</th>
+            <th scope="col">Hành Động</th>
 
 
         </tr>
@@ -47,7 +47,7 @@
             <td>{{ order.status}}</td>
 
             <td>
-                <a href="/update-order/{{ order.id }}">Update Status</a>
+                <a href="/update-order/{{ order.id }}">Cập Nhật Trạng Thái</a>
             </td>
 
 
