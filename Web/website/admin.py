@@ -285,18 +285,11 @@ def add_recipe():
                 db.session.add(recipe_ingredient)
 
             db.session.commit()
-            flash('Recipe added successfully!', 'success')
+            flash('Thêm công thức thành công!', 'success')
             return redirect(url_for('admin.shop_recipe'))
 
         except Exception as e:
             db.session.rollback()
-            flash(f'Error adding recipe: {e}', 'danger')
-
-    else:
-        print("🔴 Form.errors:", form.errors)
-        for i, entry in enumerate(form.ingredients.entries):
-            print(f"🧪 Ingredient #{i} errors:", entry.form.errors)
-        flash('Thêm công thức')
 
     return render_template('add_recipe.html', form=form)
 
