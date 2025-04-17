@@ -54,10 +54,10 @@ def login():
                 login_user(customer)
                 return redirect('/')
             else:
-                flash('Incorrect Email or Password')
+                flash('Email hoặc mật khẩu sai')
 
         else:
-            flash('Account does not exist please Sign Up')
+            flash('Tài khoản không tồn tại')
 
     return render_template('login.html', form=form)
 

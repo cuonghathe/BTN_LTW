@@ -45,10 +45,10 @@ def add_shop_items():
             try:
                 db.session.add(new_shop_item)
                 db.session.commit()
-                flash(f'{product_name} added Successfully')
+                flash(f'{product_name} thêm thành công')
                 return redirect('/add-shop-items')
             except Exception as e:
-                flash('Product Not Added!!')
+                flash('Lỗi')
         return render_template('add_shop_items.html', form=form)
     return render_template('404.html')
 
@@ -89,10 +89,10 @@ def update_item(item_id):
             
             try:
                 db.session.commit()
-                flash(f'{product_name} updated Successfully')
+                flash(f'{product_name} cập nhật thành công')
                 return redirect('/shop-items')
             except Exception as e:
-                flash('Item Not Updated!!!')
+                flash('Lỗi')
         return render_template('update_item.html', form=form)
     return render_template('404.html')
 

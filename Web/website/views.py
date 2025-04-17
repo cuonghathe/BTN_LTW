@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, flash, redirect, request, jsonify
-from .models import Product, Cart, Order
+from .models import Product, Cart, Order, Ingredient
 from flask_login import login_required, current_user
 from . import db
 from intasend import APIService
@@ -18,7 +18,8 @@ def home():
     items = Product.query.filter_by(flash_sale=True)
 
     return render_template('home.html', items=items, cart=Cart.query.filter_by(customer_link=current_user.id).all()
-                           if current_user.is_authenticated else [])
+                        if current_user.is_authenticated else [])
+    
 
 
 @views.route('/add-to-cart/<int:item_id>')
@@ -151,7 +152,7 @@ def place_order():
 
             service = APIService(token=API_TOKEN, publishable_key=API_PUBLISHABLE_KEY, test=True)
             create_order_response = service.collect.mpesa_stk_push(phone_number='YOUR_NUMBER ', email=current_user.email,
-                                                                   amount=total + 200, narrative='Purchase of goods')
+                                                                amount=total + 200, narrative='Purchase of goods')
 
             for item in customer_cart:
                 new_order = Order()
