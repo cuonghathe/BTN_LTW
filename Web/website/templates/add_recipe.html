@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block title %} Add Recipe {% endblock %}
+
+{% block body %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const ingredientsContainer = document.getElementById('ingredients-container');
+        const addIngredientButton = document.getElementById('add-ingredient');
+    
+        // Initial count of ingredients
+        let ingredientIndex = document.querySelectorAll('.ingredient-row').length;
+    
+        // Get the ingredient options from the first select field
+        const ingredientOptions = document.querySelector('select[name^="ingredients-0-ingredient"]').innerHTML;
+    
+        addIngredientButton.addEventListener('click', function () {
+            const newRow = document.createElement('div');
+            newRow.classList.add('ingredient-row', 'd-flex', 'align-items-center', 'mb-2');
+            newRow.innerHTML = `
+                <select name="ingredients-${ingredientIndex}-ingredient" class="form-control mr-2">
+                    ${ingredientOptions}
+                </select>
+                <input type="number" name="ingredients-${ingredientIndex}-quantity" class="form-control mr-2" placeholder="Số Lượng" step="any" min="0">
+                <input type="text" name="ingredients-${ingredientIndex}-unit" class="form-control mr-2" placeholder="Đơn Vị">
+                <button type="button" class="btn btn-danger remove-ingredient">X</button>
+            `;
+            ingredientsContainer.appendChild(newRow);
+            ingredientIndex++;
+        });
+    
+        ingredientsContainer.addEventListener('click', function (e) {
+            if (e.target.classList.contains('remove-ingredient')) {
+                e.target.parentElement.remove();
+            }
+        });
+    });
+</script>
+
+<div class="create_recipe_body">
+    <section>
+        <div class="container form_container bg-white p-4 rounded shadow" style="max-width: 1000px; margin-top: 20px;">
+            <div class="form_data">
+                <div class="form_heading">
+                    <h1>Thêm Công Thức</h1>
+                </div>
+
+                <form action="" method="POST" enctype="multipart/form-data" class="summit_form">
+                    {{ form.hidden_tag() }}
+
+                    <div class="form_input">
+                        <label for="name">Tên Công Thức</label>
+                        {{ form.name(class="form-control") }}
+                    </div>
+
+                    <div class="form_input">
+                        <label for="description">Mô Tả</label>
+                        {{ form.description(class="form-control") }}
+                    </div>
+
+                    <div class="form_input">
+                        <label for="ingredients">Nguyên Liệu</label>
+                        <div id="ingredients-container">
+                            {% for ingredient in form.ingredients %}
+                            <div class="ingredient-row d-flex align-items-center mb-2">
+                                {{ ingredient.csrf_token }}
+                                {{ ingredient.ingredient(class="form-control mr-2", placeholder="Nguyên Liệu") }}
+                                {{ ingredient.quantity(class="form-control mr-2", placeholder="Số Lượng") }}
+                                {{ ingredient.unit(class="form-control mr-2", placeholder="Đơn Vị") }}
+                                <button type="button" class="btn btn-danger remove-ingredient">X</button>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <button type="button" id="add-ingredient" class="btn btn-secondary mt-2">Thêm Nguyên Liệu</button>
+                    </div>
+
+                    <div class="form_input">
+                        <label for="instructions">Hướng Dẫn</label>
+                        {{ form.instructions(class="form-control") }}
+                    </div>
+
+                    <div class="form_input">
+                        <label for="cooking_time">Thời Gian Nấu</label>
+                        {{ form.cooking_time(class="form-control") }}
+                    </div>
+
+                    <div class="form_input">
+                        <label for="serving_size">Số Lượng Suất Ăn</label>
+                        {{ form.serving_size(class="form-control") }}
+                    </div>
+
+                    <div class="form_input">
+                        <label for="recipe_picture">Ảnh Công Thức</label>
+                        {{ form.recipe_picture(class="form-control-file") }}
+                    </div>
+
+                    
+
+                    <button type="submit" class="btn btn-primary mt-3">{{ form.add_recipe.label.text }}</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

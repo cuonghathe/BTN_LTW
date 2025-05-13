@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %} Đơn hàng {% endblock %}
+
+{% block body %}
+<div class="container my-5">
+    <h2 class="text-center text-white mb-4">Lịch sử đơn hàng của bạn</h2>
+
+    {% if orders|length < 1 %}
+        <p class="text-white text-center">Bạn chưa có đơn hàng nào.</p>
+    {% else %}
+    <table class="table table-bordered table-striped bg-white">
+        <thead class="table-dark">
+            <tr>
+                <th>Sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Giá</th>
+                <th>Trạng thái</th>
+                <th>Mã thanh toán</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.product.product_name }}</td>
+                <td>{{ order.quantity }}</td>
+                <td>{{ order.price }} đ</td>
+                <td>{{ order.status }}</td>
+                <td>{{ order.payment_id }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</div>
+{% endblock %}

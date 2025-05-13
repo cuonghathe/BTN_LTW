@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ recipe.name }}</title>
+    <link rel="stylesheet" href="recipe.css">
+</head>
+<body>
+    <div class="recipe-container">
+        <div class="recipe-header-details-container">
+            <div class="recipe-header">
+                <h1 class="recipe-title">{{ recipe.name }}</h1>
+                <div class="recipe-image-container">
+                    <img class="recipe-image" src="{{ recipe.recipe_picture }}" alt="Recipe Image">
+                </div>
+            </div>
+        </div>
+
+        <div class="recipe-description">
+            <h3>Mô tả</h3>
+            <p>{{ recipe.description }}</p>
+        </div>
+
+        <div class="recipe-details">
+            <h3>Chi tiết công thức</h3>
+            <p><strong>Thời gian nấu:</strong> {{ recipe.cooking_time }}</p>
+            <p><strong>Khẩu phần:</strong> {{ recipe.serving_size }}</p>
+        </div>
+
+        <div class="recipe-ingredients">
+            <h3>Nguyên liệu</h3>
+            <ul>
+                {% for ingredient in recipe.ingredients %}
+                <li>
+                    {{ ingredient.ingredient.name }}: {{ ingredient.quantity }} {{ ingredient.unit }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="recipe-instructions">
+            <h3>Hướng dẫn</h3>
+            <p>{{ recipe.instructions }}</p>
+        </div>
+    </div>
+</body>
+</html>

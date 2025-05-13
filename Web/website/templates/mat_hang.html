@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %} Mặt hàng {% endblock %}
+
+{% block body %}
+<div class="container text-center my-5">
+  <h3 class="text-white mb-4">Sản phẩm đang giảm giá</h3>
+
+  {% if items|length < 1 %}
+    <p class="text-white">Không có mặt hàng nào.</p>
+  {% else %}
+  <div class="row justify-content-center" style="margin: 8px; background-color: rgb(219, 218, 218);" id="column">
+    {% for item in items %}
+    <div class="col-md-3" style="background-color: white; margin: 10px; border-radius: 10px; padding: 10px;">
+      <img src="{{ item.product_picture }}" alt="{{ item.product_name }}" style="height: 202px; width: 180px; border-radius: 10px; object-fit: cover;">
+      <div class="row mt-2">
+        <h6 style="color: gray;">{{ item.product_name }}</h6>
+      </div>
+      <div class="row mt-2 align-items-center">
+        <div class="col text-start">
+          <h5 style="font-weight: 600;">{{ item.current_price }} đ</h5>
+          <p style="color: gray;"><del>{{ item.previous_price }} đ</del></p>
+        </div>
+        <div class="col text-end">
+          <a href="/add-to-cart/{{ item.id }}" class="btn btn-sm btn-primary">Thêm</a>
+        </div>
+      </div>
+      <div class="row">
+        <p>{{ item.in_stock }} sản phẩm còn lại</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

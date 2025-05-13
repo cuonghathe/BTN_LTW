@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %} Trang chủ {% endblock %}
+
+{% block body %}
+
+<!-- DANH MỤC CHÍNH -->
+<div class="container text-center">
+  <div class="row text-center my-4" style="gap: 30px; justify-content: center;">
+    <div class="col-md-3 bg-white p-3 rounded shadow" style="cursor: pointer;" onclick="window.location.href='/mat-hang'">
+      <i class="fa-solid fa-box fa-2x mb-2"></i>
+      <h5>Mặt hàng</h5>
+    </div>
+    <div class="col-md-3 bg-white p-3 rounded shadow" style="cursor: pointer;" onclick="window.location.href='/nguyen-lieu'">
+      <i class="fa-solid fa-carrot fa-2x mb-2"></i>
+      <h5>Nguyên liệu</h5>
+    </div>
+    <div class="col-md-3 bg-white p-3 rounded shadow" style="cursor: pointer;" onclick="window.location.href='/cong-thuc'">
+      <i class="fa-solid fa-book-open fa-2x mb-2"></i>
+      <h5>Công thức</h5>
+    </div>
+  </div>
+</div>
+
+<!-- SẢN PHẨM KHUYẾN MÃI -->
+<div class="container text-center">
+  <h3 class="text-white mb-4">Sản phẩm đang giảm giá</h3>
+  <div class="row" style="margin: 8px; background-color: rgb(219, 218, 218);" id="column">
+    {% for item in items %}
+    <div class="col" style="background-color: white; margin: 10px; border-radius: 10px; padding: 10px;">
+      <img src="{{ item.product_picture }}" alt="" style="height: 202px; width: 180px; border-radius: 10px;">
+      <div class="row mt-2">
+        <h6 style="color: gray;">{{ item.product_name }}</h6>
+      </div>
+      <div class="row mt-2">
+        <div class="col">
+          <h5 style="font-weight: 600;">{{ item.current_price }} đ</h5>
+          <strike><p style="color: gray;">{{ item.previous_price }} đ</p></strike>
+        </div>
+        <div class="col">
+          <a href="/add-to-cart/{{ item.id }}" class="btn btn-sm btn-primary">Thêm</a>
+        </div>
+      </div>
+      <div class="row">
+        <p>{{ item.in_stock }} sản phẩm còn lại</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

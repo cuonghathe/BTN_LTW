@@ -1,0 +1,159 @@
+/* Tổng quan */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.recipe-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Header công thức */
+.recipe-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.recipe-title {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.recipe-image-container {
+  max-width: 150px;
+  max-height: 150px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.recipe-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Chi tiết công thức */
+.recipe-details {
+  margin-top: 20px;
+}
+
+.recipe-details h4 {
+  margin: 10px 0;
+  font-size: 1.2rem;
+}
+
+.recipe-details p {
+  margin: 5px 0;
+  font-size: 1rem;
+}
+
+.description {
+  margin-top: 15px;
+}
+
+.description p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Nguyên liệu và cách làm */
+.recipe-ingredients-instructions {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.ingredients-card, .instructions-card {
+  flex: 1;
+  background: #f4f4f4;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.ingredients-card h4, .instructions-card h4 {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.ingredients-card ul, .instructions-card ol {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 1rem;
+}
+
+.ingredients-card li, .instructions-card li {
+  margin-bottom: 5px;
+}
+
+/* Đánh giá */
+.reviewdetails {
+  margin-top: 30px;
+}
+
+.reviewdetails h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+.review-form {
+  margin-bottom: 20px;
+}
+
+.review-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.review-form input, .review-form textarea, .review-form button {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.review-form button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.review-form button:hover {
+  background-color: #0056b3;
+}
+
+.user-reviews .review {
+  margin-bottom: 15px;
+  padding: 10px;
+  background: #f4f4f4;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.user-reviews .review h5 {
+  margin: 0 0 5px;
+  font-size: 1rem;
+}
+
+.user-reviews .review p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.stars {
+  color: #ffcc00;
+}

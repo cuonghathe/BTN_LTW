@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %} Công thức {% endblock %}
+
+{% block body %}
+<div class="container text-center my-5">
+  <h3 class="text-white mb-4">Danh sách Công thức</h3>
+
+  {% if recipes|length < 1 %}
+    <p class="text-white text-center">Không có công thức nào.</p>
+  {% else %}
+  <div class="row justify-content-center" style="margin: 8px; background-color: rgb(219, 218, 218);">
+    {% for recipe in recipes %}
+    <div class="col-md-3" style="background-color: white; margin: 10px; border-radius: 10px; padding: 10px;">
+      {% if recipe.recipe_picture %}
+        <img src="{{ url_for('admin.get_image', filename=recipe.recipe_picture.split('media/')[-1]) }}" alt="Ảnh công thức" style="height: 200px; width: 100%; border-radius: 10px; object-fit: cover;">
+      {% else %}
+        <div style="height: 200px; background-color: #e9ecef; border-radius: 10px;" class="d-flex align-items-center justify-content-center text-muted">
+          Không có ảnh
+        </div>
+      {% endif %}
+
+      <div class="row mt-2">
+        <h6 style="color: gray;">{{ recipe.name }}</h6>
+      </div>
+      <div class="row mt-2 text-start">
+        <p class="mb-1">⏱ Thời gian nấu: {{ recipe.cooking_time }}</p>
+        <p class="mb-2">🍽 Khẩu phần ăn: {{ recipe.serving_size }}</p>
+      </div>
+      <div class="row">
+        <a href="/chi-tiet-cong-thuc/{{ recipe.id }}" class="btn btn-sm btn-primary w-100">Xem chi tiết</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

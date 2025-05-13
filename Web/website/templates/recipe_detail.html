@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ recipe.name }}</title>
+    <link rel="stylesheet" href="Recipe.css">
+</head>
+<body>
+    <div class="recipe-container">
+        <div class="recipe-header-details-container">
+            <div class="recipe-header">
+                <h1 class="recipe-title">{{ recipe.name }}</h1>
+                <div class="recipe-image-container">
+                    <img class="recipe-image" src="{{ recipe.recipe_picture }}" alt="Recipe Image">
+                </div>
+            </div>
+            <div class="recipe-details">
+                <h4 class="recipe-author">Tác giả: <span class="review">{{ recipe.author if recipe.author else 'Không rõ' }}</span></h4>
+                <div class="rating_info">
+                    Điểm: <span class="star">{{ recipe.rating if recipe.rating else 'Chưa có' }} ★</span>
+                    <button class="review_btn">({{ recipe.review_count if recipe.review_count else 0 }}) Đánh giá</button>
+                </div>
+                <p>Thời gian nấu: <span>{{ recipe.cooking_time }} phút</span></p>
+                <p>Suất ăn: <span>{{ recipe.serving_size }}</span></p>
+                <div class="description">
+                    <h4>Mô tả:</h4>
+                    <p>{{ recipe.description }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="recipe-ingredients-instructions">
+            <div class="ingredients-card">
+                <h4>Nguyên liệu</h4>
+                <ul>
+                    {% for ingredient in recipe.ingredients %}
+                    <li>{{ ingredient.name }}: {{ ingredient.quantity }} {{ ingredient.unit }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="instructions-card">
+                <h4>Cách làm</h4>
+                <ol>
+                    {% for step in recipe.instructions.split('\n') %}
+                    <li>{{ step }}</li>
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
+
+</body>
+</html>
