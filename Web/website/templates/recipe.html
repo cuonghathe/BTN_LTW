@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %} Danh Sách Công Thức {% endblock %}
+
+{% block body %}
+<div class="container text-center">
+    <h2 style="margin: 20px 0;">Danh Sách Công Thức</h2>
+    <div class="row justify-content-center" style="margin: 8px;" id="column">
+
+        {% for recipe in recipes %}
+        <div class="col-md-3 col-sm-6 col-12" style="margin-bottom: 20px;">
+            <div class="card" style="border-radius: 10px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                <img src="{{ url_for('static', filename='images/' + recipe.recipe_picture) }}" alt="{{ recipe.name }}" class="card-img-top" style="height: 180px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title" style="font-size: 16px; font-weight: bold;">{{ recipe.name }}</h5>
+                    <p class="card-text" style="font-size: 14px; color: gray;">{{ recipe.description[:50] }}...</p>
+                    <a href="/recipe/{{ recipe.id }}" class="btn btn-primary btn-sm">Xem Chi Tiết</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock %}

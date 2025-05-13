@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %} Add Shop Items {% endblock %}
+
+{% block body %}
+<div class="create_recipe_body" >
+    <section>
+        <div class="container form_container bg-white p-4 rounded shadow" style="max-width: 1000px; margin-top: 20px;">
+            <div class="form_data">
+                <div class="form_heading">
+                    <h1>Thêm Nguyên Liệu</h1>
+                </div>
+
+                <form action="" method="POST" enctype="multipart/form-data" class="summit_form">
+                    {{ form.hidden_tag() }}
+
+                    <div class="form_input">
+                        <label for="name">Tên</label>
+                        {{ form.product_name(class="form-control") }}
+                    </div>
+
+                    <div class="form_input">
+                        <label for="description">Mô Tả</label>
+                        {{ form.description(class="form-control") }}
+                    </div>
+
+                    <div class="form_input">
+                        <label for="previous_price">Giá Trước Đây</label>
+                        {{ form.previous_price(class="form-control") }}
+                    </div>
+
+                    <div class="form_input">
+                        <label for="current_price">Giá Hiện Tại</label>
+                        {{ form.current_price(class="form-control") }}
+                    </div>
+
+                    <div class="form_input">
+                        <label for="in_stock">Số Lượng Tồn Kho</label>
+                        {{ form.in_stock(class="form-control") }}
+                    </div>
+
+                    <div class="form_input">
+                        <div class="form-check">
+                            {{ form.flash_sale(class="form-check-input") }}
+                            <label class="form-check-label" for="flash_sale" style="font-size: 18px;">Khuyến mãi</label>
+                        </div>
+                    </div>
+
+                    <div class="form_input">
+                        <label for="ingredient_picture">Ảnh Nguyên Liệu</label>
+                        {{ form.product_picture(class="form-control-file") }}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mt-3">{{ form.add_product(class="btn btn-primary") }}</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}

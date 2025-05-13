@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %} Cập Nhật Nguyên Liệu {% endblock %}
+
+{% block body %}
+<div class="create_recipe_body">
+    <section>
+        <div class="container form_container bg-white p-4 rounded shadow" style="max-width: 1000px; margin-top: 20px;">
+            <div class="form_data">
+                <div class="form_heading">
+                    <h1>Cập Nhật Nguyên Liệu</h1>
+                </div>
+
+                <form action="" method="POST" enctype="multipart/form-data" class="summit_form">
+                    {{ form.hidden_tag() }}
+
+                    <div class="form_input">
+                        <label for="name">Tên</label>
+                        {{ form.name(class="form-control") }}
+                    </div>
+
+                    <div class="form_input">
+                        <label for="description">Mô Tả</label>
+                        {{ form.description(class="form-control") }}
+                    </div>
+
+                    <div class="form_input">
+                        <label for="current_price">Giá Hiện Tại</label>
+                        {{ form.current_price(class="form-control") }}
+                    </div>
+
+                    <div class="form_input">
+                        <label for="previous_price">Giá Trước Đây</label>
+                        {{ form.previous_price(class="form-control") }}
+                    </div>
+
+                    <div class="form_input">
+                        <label for="in_stock">Số Lượng Tồn Kho</label>
+                        {{ form.in_stock(class="form-control") }}
+                    </div>
+
+                    <div class="form_input">
+                        <label for="quantity_unit">Số Lượng và Đơn Vị</label>
+                        <div class="d-flex">
+                            <input type="number" name="quantity" placeholder="Số Lượng" class="form-control mr-2" value="{{ form.quantity.data }}">
+                            <select name="unit" class="form-control">
+                                <option value="">Chọn đơn vị</option>
+                                <option value="g" {% if form.unit.data == "g" %}selected{% endif %}>g</option>
+                                <option value="kg" {% if form.unit.data == "kg" %}selected{% endif %}>kg</option>
+                                <option value="L" {% if form.unit.data == "L" %}selected{% endif %}>L</option>
+                                <option value="ml" {% if form.unit.data == "ml" %}selected{% endif %}>ml</option>
+                                <option value="cái" {% if form.unit.data == "cái" %}selected{% endif %}>cái</option>
+                                <option value="chai" {% if form.unit.data == "chai" %}selected{% endif %}>chai</option>
+                                <option value="củ" {% if form.unit.data == "củ" %}selected{% endif %}>củ</option>
+                                <option value="quả" {% if form.unit.data == "quả" %}selected{% endif %}>quả</option>
+                                <option value="gói" {% if form.unit.data == "gói" %}selected{% endif %}>gói</option>
+                              </select>
+                        </div>
+                    </div>
+
+                    <div class="form_input">
+                        <label for="flash_sale">Flash Sale</label>
+                        {{ form.flash_sale(class="form-check-input") }}
+                    </div>
+
+                    <div class="form_input">
+                        <label for="ingredient_picture">Ảnh Nguyên Liệu</label>
+                        {{ form.ingredient_picture(class="form-control-file") }}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mt-3">{{ form.update_ingredient.label.text }}</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
